@@ -1,3 +1,5 @@
+![SLUR](https://unaaldia.hispasec.com/wp-content/uploads/2017/07/41da7-2.png)
+
 # kali linux
 # trap IP
 
