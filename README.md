@@ -88,7 +88,7 @@ $ pkg install tur-repo
 $ pkg install zphisher
 $ zphisher
 
-Dockerfile
+# Dockerfile
 
 FROM alpine:latest
 LABEL MAINTAINER="https://github.com/htr-tech/zphisher"
